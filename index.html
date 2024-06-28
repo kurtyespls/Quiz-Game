@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+
+<body>
+
+
+
+
+    <div id="main-menu">
+        <h1>Quiz Game</h1>
+    					<p>Welcome to the QUIZ GAME</p>
+    					<p>Dito masusukat ang talino mo boi</p>
+        <h3>DONT CHEAT!!!!!!</h3>
+        <input type="text" id="player-name" placeholder="Enter your name">
+        <br>
+        <select id="category-select">
+        					<option value="Fruits">Fruits</option>
+        					<option value="Vegetables">Vegetables</option>
+        					<option value="Animals">Animals</option>
+        					
+            <option value="Countries">Countries</option>
+        					<option value="History">History</option>
+        					<option value="Science">Science</option>
+        					
+            <option value="Filipino Bayani">Filipino Bayani</option>
+        					<option value="Filipino Foods">Filipino Foods</option>
+        					
+        </select>
+    					
+        <br>
+        <button id="start-game-btn">Start Game</button>
+        <button id="leaderboard-btn">Leaderboard</button>
+    					<button id="how-to-play-btn">How to Play</button>
+        <button id="exit-game-btn">Exit Game</button>
+    					<p>by: Kurt John Kyzel O. Fabro</p>
+    </div>
+    <div id="quiz-container" class="hide">
+        <div id="quiz">
+            <div id="question">Question will appear here</div>
+            <div id="choices">
+                <!-- Choices will be dynamically inserted here -->
+            </div>
+        </div>
+        <button id="next-btn">Next</button>
+    </div>
+    <div id="leaderboard" class="hide">
+        <h2>Leaderboard</h2>
+        <div id="leaderboard-list"></div>
+        <button id="back-btn">Back to Menu</button>
+    </div>
+					
+					
+<!-- How to Play Modal -->
+<div id="how-to-play-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>How to Play?</h2>
+        <p>Welcome to the Quiz Game! </p>
+    					<p>Follow these steps to play:</p>
+        <ol>
+            <li>Enter your name in the Player Name field.</li>
+            <li>Select a category from the dropdown menu.</li>
+            <li>Click on the Start Game button to begin.</li>
+            <li>Answer each question by clicking on the correct choice.</li>
+            <li>Click Next to move to the next question.</li>
+            <li>Finish all questions in the category to view your score.</li>
+            <li>Click on Leaderboard to view the top scores.</li>
+            <li>Have fun and enjoy the game!</li>
+        </ol>
+    					<h2 style="color: red;">WAG KA MAG CHEATTT!!!!!!</h2>
+    </div>
+</div>
+					
+    <script src="script.js"></script>
+</body>
+</html>
