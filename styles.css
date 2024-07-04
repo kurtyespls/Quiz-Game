@@ -8,56 +8,59 @@ body {
     background-color: #2b2b2b;
 }
 
-#main-menu {
-    background: #1a1a1a;
-    padding: 10px;
-    border-radius: 20px;
-    border: solid 4px #00fcec;
-    box-shadow: 0 0 20px #00fcec;
-
-    width: 100%;
-
-    text-align: center;
-
-    
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-#quiz-container, #leaderboard {
+#main-menu, #quiz-container, #leaderboard {
     background: #1a1a1a;
-    padding: 60px;
+    padding: 30px;
     border-radius: 20px;
     border: solid 4px #00fcec;
     box-shadow: 0 0 20px #00fcec;
-
-    width: 100%;
     text-align: center;
+    margin-bottom: 20px;
+    color: white;
 }
 
 h1 {
-    padding: 10px, 0px;
-    color: white;
-    font-size: 46px;
-    font-weight: bold;
-    text-align: center;
-  margin-bottom: 20px;
+    font-size: 56px;
+    margin-bottom: 20px;
 }
 
 h3 {
-    margin: 0;
     color: red;
     font-weight: bold;
-    text-align: center;
 }
 
 #main-menu p {
-  color: white;
-  margin: 0;
-  margin-bottom: 10px;
+    margin: 10px 0;
+    font-size: 25px;
+    color: white;
 }
 
-#main-menu button, #next-btn, #back-btn {
+input[type="text"], select {
+    width: 60%;
+    max-width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 2px solid #00fcec;
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    outline: none;
+}
 
-    margin: 13px;
+input[type="text"]::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+button {
+    margin: 10px;
     padding: 10px 20px;
     cursor: pointer;
     background-color: transparent;
@@ -66,65 +69,16 @@ h3 {
     border-radius: 5px;
     font-size: 16px;
     text-transform: uppercase;
-
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-#main-menu button:hover, #next-btn:hover, #back-btn:hover {
-    color: white;
+button:hover {
     background-color: #00fcec;
     box-shadow: 0 0 20px #00fcec;
-    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-#player-name {
-    width: 60%;
-    max-width: 400px;
-    padding: 5px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 2px solid #00fcec;
-  background-color: transparent;
-  color: white;
-
-    font-size: 18px;
-    height: 30px;
-    transition: border-color 0.3s, box-shadow 0,3s;
-    outline: none;
-}
-
-input {
-  margin: 0 10px;
-}
-
-input::placeholder {
-  color: white;
-  opacity: 0.8;
-}
-
-#player-name:focus {
-    transition: 0.3s;
-    box-shadow: 0 0 20px #00fcec;
-}
-
-#category-select {
-    width: 40%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 2px solid #00fcec;
-  background-color: transparent;
-  color: white;
-
-    font-size: 18px;
-    transition: border-color 0.3s, box-shadow 0,3s;
-    outline: none;
-}
-
-#category-select:focus {
-    transition: 0.3s;
-    box-shadow: 0 0 20px #00fcec;
+#quiz {
+    margin-bottom: 20px;
 }
 
 #question {
@@ -143,46 +97,40 @@ input::placeholder {
     border-radius: 5px;
     font-size: 16px;
     text-transform: uppercase;
-
     transition: border-color 0.2s, box-shadow 0.2s;
-
 }
 
-/*.choice:hover {
-    color: white;
+.choice:hover {
     background-color: #00fcec;
+    color: white;
     box-shadow: 0 0 20px #00fcec;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}*/
+}
+
+#timer {
+    font-size: 20px;
+    color: #00fcec;
+    border: 1px solid #00fcec;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto; /* Center the timer horizontally */
+}
+
 
 .correct {
-    background: #28a745;
+    background: #28a745 !important; /* Override background color for correct choice */
 }
 
 .incorrect {
-    background: #dc3545;
+    background: #dc3545 !important; /* Override background color for incorrect choice */
 }
 
 .hide {
     display: none;
 }
 
-#leaderboard {
-    color: white;
-    padding: 10px;
-}
-
-#leaderboard h2 {
-    font-size: 50px;
-}
-
-#leaderboard-list {
-    font-size: 26px;
-}
-
-/* How to Play Modal */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -200,10 +148,11 @@ input::placeholder {
     border: 1px solid #888;
     width: 60%;
     max-width: 600px;
+    text-align: center;
 }
 
-.modal-content h2, p {
-  text-align: center;
+.modal-content li {
+    text-align: left;
 }
 
 .close {
@@ -220,11 +169,15 @@ input::placeholder {
     cursor: pointer;
 }
 
-
 @media screen and (min-width: 480px) {
     #main-menu {
         width: 80%;
     }
+
+    #timer {
+        width: 100%;
+    }
+    
   #main-menu input {
     width: 80%;
   }
@@ -247,6 +200,18 @@ input::placeholder {
 @media screen and (max-width: 480px) {
     #main-menu {
         width: 80%;
+    }
+
+    h1 {
+        font-size: 36px
+    }
+
+    #timer {
+        width: 70%;
+    }
+
+    #main-menu p {
+        font-size: 2 0px;
     }
   #main-menu input {
     width: 80%;
@@ -273,6 +238,9 @@ input::placeholder {
   #main-menu input {
     width: 80%;
   }
+  #timer {
+        width: 60%;
+    }
   #quiz-container {
     width: 60%;
     height: auto;
@@ -295,6 +263,9 @@ input::placeholder {
   #main-menu input {
     width: 80%;
   }
+  #timer {
+        width: 50%;
+    }
   #quiz-container {
     width: 60%;
     height: auto;
