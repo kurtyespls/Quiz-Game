@@ -201,13 +201,14 @@ if (typeof module != 'undefined') {
     module.exports = questions;
 }
 
-
 let currentCategory = '';
 let currentQuestionIndex = 0;
 let score = 0;
 let playerName = '';
 let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+let timer; // Variable to hold the timer
 
+const QUESTION_TIME_LIMIT = 10; // Time limit per question in seconds
 const mainMenu = document.getElementById('main-menu');
 const quizContainer = document.getElementById('quiz-container');
 const leaderboardContainer = document.getElementById('leaderboard');
@@ -252,6 +253,27 @@ function startGame() {
 function setNextQuestion() {
     resetState();
     showQuestion(quizData[currentCategory][currentQuestionIndex]);
+    startTimer(QUESTION_TIME_LIMIT); // Start the timer for the next question
+}
+
+function startTimer(timeLimit) {
+    let timeLeft = timeLimit;
+    updateTimerDisplay(timeLeft);
+
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay(timeLeft);
+
+        if (timeLeft === 0) {
+            clearInterval(timer);
+            handleTimeout(); // Handle what happens when time runs out
+        }
+    }, 1000); // Update timer every second (1000 milliseconds = 1 second)
+}
+
+function updateTimerDisplay(timeLeft) {
+    const timerDisplay = document.getElementById('timer');
+    timerDisplay.textContent = `Time left: ${timeLeft}s`;
 }
 
 function showQuestion(question) {
@@ -267,7 +289,6 @@ function showQuestion(question) {
         choicesEl.appendChild(button);
     });
 }
-
 
 function resetState() {
     nextBtn.classList.add('hide');
@@ -285,30 +306,24 @@ function selectAnswer(e) {
     } else {
         selectedButton.classList.add('incorrect');
     }
+    clearInterval(timer); // Clear the timer when an answer is selected
     Array.from(choicesEl.children).forEach(button => {
         if (button.dataset.correct === 'true') {
             button.classList.add('correct');
         }
         button.disabled = true;
     });
-    
-    // Disable next button until choices are shown
-    nextBtn.disabled = true;
-    
-    // Delay showing next question for 1 second
-    setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quizData[currentCategory].length) {
-            setNextQuestion();
-        } else {
-            endGame();
-        }
-        // Enable next button after showing choices
-        nextBtn.disabled = false;
-    }, 500);
+    nextBtn.classList.remove('hide'); // Show next button after answering
 }
 
-
+function handleTimeout() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData[currentCategory].length) {
+        setNextQuestion();
+    } else {
+        endGame();
+    }
+}
 
 function endGame() {
     quizContainer.classList.add('hide');
@@ -318,12 +333,22 @@ function endGame() {
     showLeaderboard();
 }
 
-
 function showLeaderboard() {
     mainMenu.classList.add('hide');
     quizContainer.classList.add('hide');
     leaderboardContainer.classList.remove('hide');
     leaderboardList.innerHTML = leaderboard.map((entry, index) => `<div>${index + 1}. ${entry.name} - ${entry.score}</div>`).join('');
+}
+
+const resetLeaderboardBtn = document.getElementById('reset-leaderboard-btn'); // Add this if you have a reset button in your UI
+
+resetLeaderboardBtn.addEventListener('click', resetLeaderboard);
+
+function resetLeaderboard() {
+    leaderboard = []; // Clear the leaderboard array
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard)); // Update the local storage
+    // Optionally, update the UI to reflect the cleared leaderboard
+    leaderboardList.innerHTML = ''; // Clear the leaderboard list on the UI
 }
 
 function showMainMenu() {
@@ -352,4 +377,3 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Existing JavaScript code continues...
